@@ -38,22 +38,28 @@ class _LoginPageState extends State<LoginPage> {
   String mensaje = '';
 
   Future<List> login() async {
-    final respuesta = await http.post("http://192.168.0.13/calendar/login.php", body: {
+    final respuesta = await http.post("http://192.168.0.8/calendar/login.php", body: {
       "usuario": controllerUser.text,
       "contrasenia": controllerPass.text,
     });
     
     var datauser = json.decode(respuesta.body);
   
-    if(datauser.lenght==0){
+    if(datauser.length == 0){
       setState(() {
-        mensaje="usuario o contraseña incorrecta";
+        mensaje = "usuario o contraseña incorrecta";
       });
     } else {
-        if (datauser[0]['idTipoUsuario'] == 2){
-          Navigator.pushReplacementNamed(context, '/estudiantesPage');
-        } else if (datauser[0]['idTipoUsuario'] == 1) {
-          Navigator.pushReplacementNamed(context, '/profesoresPage');
+        if (datauser[0]['idTipoUsuario'] == '2'){
+          Navigator.push(context,MaterialPageRoute(
+              builder:(context)=> Estudiante(),
+            ),
+          );
+        } else if (datauser[0]['idTipoUsuario'] == '1') {
+            Navigator.push(context,MaterialPageRoute(
+              builder:(context) => Profesor(),
+            ),
+          );
         }
         setState(() {
           username = datauser[0]['usuario']; 

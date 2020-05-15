@@ -7,7 +7,13 @@ class Profesor extends StatelessWidget {
       appBar: new AppBar(title: Text('Pagina Profesor')),
       body: new Column(
         children: <Widget>[
-          new Text('Estamos en Profesores'),
+          Text('Estamos en Profesores'),
+           RaisedButton(
+            child:Text("Salir"),
+            onPressed: (){
+              Navigator.pushReplacementNamed(context, "/LoginPage");
+            },
+          )
         ],
       ),
     );
