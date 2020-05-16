@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
   String mensaje = '';
 
   Future<List> login() async {
-    final respuesta = await http.post("http://192.168.0.8/calendar/login.php", body: {
+    final respuesta = await http.post("http://192.168.0.6/calendar/login.php", body: {
       "usuario": controllerUser.text,
       "contrasenia": controllerPass.text,
     });
@@ -51,15 +51,9 @@ class _LoginPageState extends State<LoginPage> {
       });
     } else {
         if (datauser[0]['idTipoUsuario'] == '2'){
-          Navigator.push(context,MaterialPageRoute(
-              builder:(context)=> Estudiante(),
-            ),
-          );
+          Navigator.push(context,MaterialPageRoute(builder:(context)=> Estudiante(),),);
         } else if (datauser[0]['idTipoUsuario'] == '1') {
-            Navigator.push(context,MaterialPageRoute(
-              builder:(context) => Profesor(),
-            ),
-          );
+            Navigator.push(context,MaterialPageRoute(builder:(context) => Profesor(),),);
         }
         setState(() {
           username = datauser[0]['usuario']; 
