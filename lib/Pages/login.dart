@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:app_calendar_guide/Pages/estudiantesPage.dart';
+import 'package:app_calendar_guide/Pages/profesoresPage.dart';
 import 'package:flutter/material.dart';
-import 'estudiantesPage.dart';
-import 'profesoresPage.dart';
 import 'package:http/http.dart' as http;
+
+
 
 String username;
 
@@ -14,8 +16,6 @@ class LoginApp extends StatelessWidget {
       title: 'Login',
       home: LoginPage(),
       routes: <String, WidgetBuilder>{
-        '/profesoresPage': (BuildContext context) => new Profesor(),
-        '/estudiantesPage': (BuildContext context) => new Estudiante(),
         '/LoginPage': (BuildContext context) => LoginPage(),
       },
     );
@@ -48,9 +48,17 @@ class _LoginPageState extends State<LoginPage> {
       });
     } else {
         if (datauser[0]['idTipoUsuario'] == '2'){
-          Navigator.push(context,MaterialPageRoute(builder:(context)=> Estudiante(),),);
+          Navigator.push(
+            context,MaterialPageRoute(
+              builder: (context) => Estudiante(),
+            ),
+          );
         } else if (datauser[0]['idTipoUsuario'] == '1') {
-          Navigator.push(context,MaterialPageRoute(builder:(context) => Profesor(),),);
+          Navigator.push(
+            context,MaterialPageRoute(
+              builder: (context) => Profesor(),
+            ),
+          );
         }
         setState(() {
           username = datauser[0]['usuario']; 

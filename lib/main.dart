@@ -12,7 +12,7 @@ class InicioApp extends StatelessWidget {
       title: 'Calendary guide',
       home:Scaffold(
         body: ClaseInicio(),
-     ),
+      ),
     );
   }
 }
