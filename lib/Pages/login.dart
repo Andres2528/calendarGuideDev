@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   String mensaje = "";
 
   Future<List> login() async {
-    final respuesta = await http.post("http://192.168.0.6/calendar/login.php", body: {
+    final respuesta = await http.post("http://192.168.0.3/calendar/login.php", body: {
       "usuario": controllerUser.text,
       "contrasenia": controllerPass.text,
     });

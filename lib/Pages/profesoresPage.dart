@@ -1,5 +1,7 @@
 import 'package:app_calendar_guide/main.dart';
+import 'package:app_calendar_guide/theme/colors/light_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -12,8 +14,16 @@ class Profesor extends StatefulWidget {
 
 class _Profesor extends State<Profesor> {
 
+  bool dialVisible = true;
+
+  void setDialVisible(bool value) {
+    setState(() {
+      dialVisible = value;
+    });
+  }
+
   Future<List> getData() async{
-    final response = await http.get("http://192.168.0.6/calendar/getdatap.php");
+    final response = await http.get("http://192.168.0.3/calendar/getdatap.php");
     return json.decode(response.body);
   }
 
@@ -22,13 +32,60 @@ class _Profesor extends State<Profesor> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Listado Usuarios"),
+        backgroundColor: LightColors.kOrange,
       ),
-      floatingActionButton: new FloatingActionButton(
-        child: new Icon(Icons.exit_to_app),
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
-          builder: (BuildContext context) => new InicioApp(),
-        )),
-      ),
+      
+      // MENU
+          floatingActionButton: SpeedDial(
+          // both default to 16
+          marginRight: 18,
+          marginBottom: 20,
+          animatedIcon: AnimatedIcons.menu_close,
+          animatedIconTheme: IconThemeData(size: 22.0),
+          // this is ignored if animatedIcon is non null
+          // child: Icon(Icons.add),
+          visible: dialVisible,
+          // If true user is forced to close dial manually 
+          // by tapping main button and overlay is not rendered.
+          closeManually: false,
+          curve: Curves.bounceIn,
+          overlayColor: Colors.black,
+          overlayOpacity: 0.5,
+          onOpen: () => print('OPENING DIAL'),
+          onClose: () => print('DIAL CLOSED'),
+          tooltip: 'Speed Dial',
+          heroTag: 'speed-dial-hero-tag',
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 8.0,
+          shape: CircleBorder(),
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.exit_to_app),
+              backgroundColor: Colors.red,
+              label: 'Cerrar sesión',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new InicioApp(),
+              )),
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.location_on),
+              backgroundColor: Colors.orange,
+              label: 'Sede',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => print('SECOND CHILD'),
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.calendar_today),
+              backgroundColor: Colors.green,
+              label: 'Calendario',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => print('THIRD CHILD'),
+            ),
+          ],
+        ),
+
       body: new FutureBuilder<List>(
         future: getData(),
         builder: (context, snapshot) {
