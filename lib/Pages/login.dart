@@ -4,8 +4,6 @@ import 'package:app_calendar_guide/Pages/profesoresPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
-
 String username;
 
 class LoginApp extends StatelessWidget {
@@ -32,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController controllerUser = new TextEditingController();
   TextEditingController controllerPass = new TextEditingController();
 
-  String mensaje = '';
+  String mensaje = "";
 
   Future<List> login() async {
     final respuesta = await http.post("http://192.168.0.6/calendar/login.php", body: {
@@ -162,6 +160,21 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 6,
+                              right: 32,
+                            ),
+                            child:  Text(
+                              'Recordar contraseña',
+                              style: TextStyle(
+                                color: Colors.orange,
+                              ),
+                            ),
+                          ),
+                        ),
                         Spacer(),
                         new RaisedButton(
                           child: new Text("Ingresar"),
@@ -174,9 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pop(context);
                           },
                         ),
-                        Text(mensaje,
-                        style: TextStyle(fontSize: 25.0, color: Colors.red),
-                        )
+                        Text(mensaje, style: TextStyle(fontSize: 25.0, color: Colors.red),)
                       ],
                     ),
                 ),
