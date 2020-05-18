@@ -1,3 +1,5 @@
+import 'package:app_calendar_guide/Pages/calendarioE.dart';
+import 'package:app_calendar_guide/Pages/dataNotaPage.dart';
 import 'package:app_calendar_guide/Pages/openSedeEstudiante.dart';
 import 'package:app_calendar_guide/main.dart';
 import 'package:app_calendar_guide/theme/colors/light_colors.dart';
@@ -31,7 +33,7 @@ class _Estudiante extends State<Estudiante> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Listado Usuarios"),
+        title: new Text("Bienvenido"),
         backgroundColor: LightColors.kOrange,
       ),
           // MENU
@@ -82,7 +84,18 @@ class _Estudiante extends State<Estudiante> {
               backgroundColor: Colors.green,
               label: 'Calendario',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('THIRD CHILD'),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new CalendarioE(),
+              )),
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.note_add),
+              backgroundColor: Colors.blue,
+              label: 'Notas',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Notas(),
+              )),
             ),
           ],
         ),
@@ -118,7 +131,7 @@ class ItemList extends StatelessWidget {
             child: new Card(
               child: new ListTile(
                 title: new Text(
-                  list[0]['usuario'],
+                  "Estudiante : ${list[0]['nombre']}",
                   style: TextStyle(fontSize: 25.0, color: Colors.orangeAccent),
                 ),
                 leading: new Icon(
@@ -127,7 +140,7 @@ class ItemList extends StatelessWidget {
                   color: Colors.orangeAccent,
                 ),
                 subtitle: new Text(
-                  "Tipo Usuario : ${list[0]['tipoUsuario']}",
+                  "CC : ${list[0]['ccEstudiante']}",
                   style: TextStyle(fontSize: 20.0, color: Colors.black),
                 ),
               ),

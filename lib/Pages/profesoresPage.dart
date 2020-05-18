@@ -1,3 +1,4 @@
+import 'package:app_calendar_guide/Pages/dataActividadPage.dart';
 import 'package:app_calendar_guide/Pages/openSedeProfesor.dart';
 import 'package:app_calendar_guide/main.dart';
 import 'package:app_calendar_guide/theme/colors/light_colors.dart';
@@ -32,7 +33,7 @@ class _Profesor extends State<Profesor> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Listado Usuarios"),
+        title: new Text("Bienvenido"),
         backgroundColor: LightColors.kOrange,
       ),
       
@@ -86,6 +87,15 @@ class _Profesor extends State<Profesor> {
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () => print('THIRD CHILD'),
             ),
+            SpeedDialChild(
+              child: Icon(Icons.note),
+              backgroundColor: Colors.blue,
+              label: 'Actividad',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Actividad(),
+              )),
+            )
           ],
         ),
 
@@ -112,6 +122,7 @@ class ItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return new ListView.builder(
       itemCount: list == null ? 0 : list.length,
       itemBuilder: (context, i) {
@@ -120,17 +131,18 @@ class ItemList extends StatelessWidget {
             child: new Card(
               child: new ListTile(
                 title: new Text(
-                  list[i]['usuario'],
+                  "Profesor: ${list[i]['nombre']}",
                   style: TextStyle(fontSize: 25.0, color: Colors.orangeAccent),
                 ),
                 leading: new Icon(
-                  Icons.person_pin,
+                  Icons.person,
                   size: 50.0,
                   color: Colors.orangeAccent,
                 ),
                 subtitle: new Text(
-                  "Tipo Usuario : ${list[i]['tipoUsuario']}",
+                  "CC: ${list[i]['cc']}",
                   style: TextStyle(fontSize: 20.0, color: Colors.black),
+                  
                 ),
               ),
             ),
