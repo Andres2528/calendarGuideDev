@@ -15,7 +15,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_speed_dial: ^1.2.5
   http: any
+  url_launcher: ^5.4.7
 
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter

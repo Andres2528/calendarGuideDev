@@ -1,3 +1,4 @@
+import 'package:app_calendar_guide/Pages/openSedeEstudiante.dart';
 import 'package:app_calendar_guide/main.dart';
 import 'package:app_calendar_guide/theme/colors/light_colors.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,9 @@ class _Estudiante extends State<Estudiante> {
               backgroundColor: Colors.orange,
               label: 'Sede',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('SECOND CHILD'),
+              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                builder: (BuildContext context) => new Sedee(),
+              )),
             ),
             SpeedDialChild(
               child: Icon(Icons.calendar_today),
